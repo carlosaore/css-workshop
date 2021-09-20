@@ -1,28 +1,106 @@
-body {
-  font-family: sans-serif;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-#mynavbar {
+/* CSS Reset
+   http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* I did this with clamp but you really want some media queries
+   to handle different % for mobile (95%), tablet (90% ?) or big monitor (80%)
+ */
+body {
+  font-family: 'Roboto', sans-serif;
+  width: clamp(95%, 80%, 1000px);
+  margin: 0 auto;
+}
+
+#navbar {
   display: flex;
-  background-color: palevioletred;
+  background-color: #f76c6c;
+}
+
+#header {
+  height: 300px;
+  background-image: url("https://loremflickr.com/cache/resized/65535_51320538364_f292a35772_h_1200_300_nofilter.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Because of CSS specificity rules, we need to target the h1
+   like this so it doesn't get overridden by the the browser
+ */
+#header h1 {
+  font-size: clamp(50px, 6vw, 80px);
+  color: white;
 }
 
 #logo {
-  height: 100px;
+  height: 130px;
   width: 70%;
-  background-color: palevioletred;
   color: white;
   display: flex;
   padding-left: 20px;
   align-items: center;
 }
 
+/* Because of CSS specificity rules, we need to target the h1
+   like this so it doesn't get overridden by the the browser
+ */
+#logo h1 {
+  font-size: 200%;
+  font-weight: 400;
+}
+
 #links {
   width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding-left: 10px;
 }
 
@@ -33,40 +111,92 @@ body {
 }
 
 #main-content {
-  padding: 10%;
-  background-image: url("https://www.freecodecamp.org/news/content/images/size/w2000/2021/06/w-qjCHPZbeXCQ-unsplash.jpg");
+  padding: min(15%, 50px) min(10%, 50px);
 }
 
-.parent {
+#main-content h2 {
+  font-size: 170%;
+  margin-bottom: 20px;
+}
+
+#main-content p {
+  margin-bottom: 20px;
+}
+
+.generic-section {
+  margin-bottom: min(5%, 30px);
+}
+
+.grid-parent {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+  background-color: #f76c6c;
+  padding: 10px;
 }
 
-.parent div {
-  border: solid white 2px;
+.grid-child-1 {
+  grid-area: 1 / 1 / 3 / 3;
+}
+.grid-child-2 {
+  grid-area: 3 / 1 / 4 / 2;
+}
+.grid-child-3 {
+  grid-area: 3 / 2 / 4 / 3;
+}
+.grid-child-4 {
+  grid-area: 4 / 1 / 5 / 2;
+}
+.grid-child-5 {grid-area: 4 / 2 / 5 / 3;
+}
+
+@media screen and (min-width: 700px) {
+  #logo {
+    width: 50%;
+  }
+
+  #links {
+    width: 50%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 0;
+  }
+
+  .grid-parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    background-color: #f76c6c;
+    padding: 10px;
+  }
+
+  .grid-child-1 {
+    grid-area: 1 / 1 / 3 / 3;
+  }
+
+  .grid-child-2 {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+  .grid-child-3 {
+    grid-area: 1 / 4 / 2 / 5;
+  }
+  .grid-child-4 {
+    grid-area: 2 / 3 / 3 / 4;
+  }
+  .grid-child-5 {
+    grid-area: 2 / 4 / 3 / 5;
+  }
+}
+
+.grid-parent div {
+  border: solid white 1px;
   border-radius: 5px;
   color: white;
   font-size: 150%;
-}
-
-.div1 {
-  grid-area: 1 / 1 / 3 / 3;
-  display: grid;
-  place-items: center;
-}
-
-.div2 {
-  grid-area: 1 / 3 / 2 / 4;
-}
-.div3 {
-  grid-area: 1 / 4 / 2 / 5;
-}
-.div4 {
-  grid-area: 2 / 3 / 3 / 4;
-}
-.div5 {
-  grid-area: 2 / 4 / 3 / 5;
+  padding: 5%;
 }
